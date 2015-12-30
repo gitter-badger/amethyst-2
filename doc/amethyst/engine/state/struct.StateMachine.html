@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `StateMachine` struct in crate `amethyst`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, StateMachine">
+
+    <title>amethyst::engine::state::StateMachine - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../../../rustdoc.css">
+    <link rel="stylesheet" type="text/css" href="../../../main.css">
+
+    
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <nav class="sidebar">
+        
+        <p class='location'><a href='../../index.html'>amethyst</a>::<wbr><a href='../index.html'>engine</a>::<wbr><a href='index.html'>state</a></p><script>window.sidebarCurrent = {name: 'StateMachine', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+    </nav>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content struct">
+<h1 class='fqn'><span class='in-band'>Struct <a href='../../index.html'>amethyst</a>::<wbr><a href='../index.html'>engine</a>::<wbr><a href='index.html'>state</a>::<wbr><a class='struct' href=''>StateMachine</a></span><span class='out-of-band'><span id='render-detail'>
+            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                [<span class='inner'>&#x2212;</span>]
+            </a>
+        </span><a id='src-50' class='srclink' href='../../../src/amethyst/engine/state.rs.html#32-35' title='goto source code'>[src]</a></span></h1>
+<pre class='rust struct'>pub struct StateMachine {
+    // some fields omitted
+}</pre><div class='docblock'><p>A simple stack-based state machine.</p>
+</div><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl <a class='struct' href='../../../amethyst/engine/state/struct.StateMachine.html' title='amethyst::engine::state::StateMachine'>StateMachine</a></code></h3><div class='impl-items'><h4 id='method.new' class='method'><code>fn <a href='#method.new' class='fnname'>new</a>&lt;T: 'static&gt;(initial_state: T) -&gt; <a class='struct' href='../../../amethyst/engine/state/struct.StateMachine.html' title='amethyst::engine::state::StateMachine'>StateMachine</a> <span class='where'>where T: <a class='trait' href='../../../amethyst/engine/state/trait.State.html' title='amethyst::engine::state::State'>State</a></span></code></h4>
+<h4 id='method.current' class='method'><code>fn <a href='#method.current' class='fnname'>current</a>(&amp;mut self) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;&amp;mut <a class='struct' href='https://doc.rust-lang.org/nightly/alloc/boxed/struct.Box.html' title='alloc::boxed::Box'>Box</a>&lt;<a class='trait' href='../../../amethyst/engine/state/trait.State.html' title='amethyst::engine::state::State'>State</a>&gt;&gt;</code></h4>
+<div class='docblock'><p>Retrieves the currently active state.</p>
+</div><h4 id='method.start' class='method'><code>fn <a href='#method.start' class='fnname'>start</a>(&amp;mut self)</code></h4>
+<div class='docblock'><p>Initializes the state machine.</p>
+</div><h4 id='method.handle_events' class='method'><code>fn <a href='#method.handle_events' class='fnname'>handle_events</a>(&amp;mut self, events: &amp;<a class='struct' href='https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.i32.html'>i32</a>&gt;)</code></h4>
+<div class='docblock'><p>Passes a vector of events to the active state to handle.</p>
+</div><h4 id='method.fixed_update' class='method'><code>fn <a href='#method.fixed_update' class='fnname'>fixed_update</a>(&amp;mut self, delta_time: <a class='struct' href='../../../amethyst/engine/timing/struct.Duration.html' title='amethyst::engine::timing::Duration'>Duration</a>)</code></h4>
+<div class='docblock'><p>Updates the currently active state at a steady, fixed interval.</p>
+</div><h4 id='method.update' class='method'><code>fn <a href='#method.update' class='fnname'>update</a>(&amp;mut self, delta_time: <a class='struct' href='../../../amethyst/engine/timing/struct.Duration.html' title='amethyst::engine::timing::Duration'>Duration</a>)</code></h4>
+<div class='docblock'><p>Updates the currently active state immediately.</p>
+</div><h4 id='method.switch' class='method'><code>fn <a href='#method.switch' class='fnname'>switch</a>&lt;T: 'static&gt;(&amp;mut self, state: T) <span class='where'>where T: <a class='trait' href='../../../amethyst/engine/state/trait.State.html' title='amethyst::engine::state::State'>State</a></span></code></h4>
+<div class='docblock'><p>Sets the currently active state.</p>
+</div><h4 id='method.push' class='method'><code>fn <a href='#method.push' class='fnname'>push</a>&lt;T: 'static&gt;(&amp;mut self, state: T) <span class='where'>where T: <a class='trait' href='../../../amethyst/engine/state/trait.State.html' title='amethyst::engine::state::State'>State</a></span></code></h4>
+<div class='docblock'><p>Pauses the active state (if any) and pushes a new state onto the state
+stack.</p>
+</div><h4 id='method.pop' class='method'><code>fn <a href='#method.pop' class='fnname'>pop</a>(&amp;mut self)</code></h4>
+<div class='docblock'><p>Stops and removes the active state and un-pauses the next state on the
+stack (if any).</p>
+</div><h4 id='method.stop' class='method'><code>fn <a href='#method.stop' class='fnname'>stop</a>(&amp;mut self)</code></h4>
+<div class='docblock'><p>Shuts the state machine down.</p>
+</div></div></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>&larrb;</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>&rarrb;</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code>)
+                </p>
+            </div>
+        </div>
+    </aside>
+
+    
+
+    <script>
+        window.rootPath = "../../../";
+        window.currentCrate = "amethyst";
+        window.playgroundUrl = "";
+    </script>
+    <script src="../../../jquery.js"></script>
+    <script src="../../../main.js"></script>
+    
+    <script defer src="../../../search-index.js"></script>
+</body>
+</html>

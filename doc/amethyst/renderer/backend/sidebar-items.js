@@ -1,0 +1,1 @@
+initSidebarItems({"mod":[["state_dynamic","Structures representing dynamic GPU pipeline state."],["state_static","Structures representing static GPU pipeline state."],["traits","Traits used by all renderer backends."]]});

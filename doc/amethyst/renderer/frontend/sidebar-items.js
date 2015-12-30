@@ -1,0 +1,1 @@
+initSidebarItems({"enum":[["Light","A light source."],["Object","A physical renderable object."]],"struct":[["Frame","A collection of lights and objects to be rendered by the frontend."],["Frontend","Simple renderer frontend."]]});

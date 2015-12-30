@@ -1,0 +1,248 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Amethyst Documentation</title>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="{% block description %}{% endblock %}">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <base href="">
+
+        <link rel="stylesheet" href="book.css">
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+
+        <!-- MathJax -->
+        <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+        <!-- Fetch JQuery from CDN but have a local fallback -->
+        <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script>
+            if (typeof jQuery == 'undefined') {
+                document.write(unescape("%3Cscript src='jquery.js'%3E%3C/script%3E"));
+            }
+        </script>
+    </head>
+    <body>
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme = localStorage.getItem('theme');
+            if (theme == null) { theme = 'light'; }
+            $('body').removeClass().addClass(theme);
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var sidebar = localStorage.getItem('sidebar');
+            if (sidebar === "hidden") { $("html").addClass("sidebar-hidden") }
+            else if (sidebar === "visible") { $("html").addClass("sidebar-visible") }
+        </script>
+
+        <div id="sidebar" class="sidebar">
+            <ul class="chapter"><li><a href="./intro.html"><strong>1.</strong> Introduction</a></li><li><a href="./getting_started.html"><strong>2.</strong> Getting Started</a></li><li><ul class="section"><li><a href="./getting_started/installation.html"><strong>2.1.</strong> Installation</a></li></ul></li><li><a href="./internals.html"><strong>3.</strong> Internals</a></li><li><ul class="section"><li><a href="./internals/renderer.html"><strong>3.1.</strong> Renderer</a></li><li><ul class="section"><li><a href="./internals/renderer/frontend.html"><strong>3.1.1.</strong> Frontend</a></li><li><a href="./internals/renderer/ir.html"><strong>3.1.2.</strong> IR</a></li><li><a href="./internals/renderer/backend.html"><strong>3.1.3.</strong> Backend</a></li></ul></li><li><a href="./internals/scripting.html"><strong>3.2.</strong> Scripting</a></li></ul>
+        </div>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar" class="menu-bar">
+                    <div class="left-buttons">
+                        <i id="sidebar-toggle" class="fa fa-bars"></i>
+                        <i id="theme-toggle" class="fa fa-paint-brush"></i>
+                    </div>
+
+                    <h1 class="menu-title">Amethyst Documentation</h1>
+
+                    <div class="right-buttons">
+                        <i id="print-button" class="fa fa-print" title="Print this book"></i>
+                    </div>
+                </div>
+
+                <div id="content" class="content">
+                    <h1>Amethyst</h1>
+<p>Howdy! This book will teach you everything you need to know about building video games and interactive simulations with the Amethyst software development kit. Amethyst is a clean and modern game engine written in <a href="https://www.rust-lang.org/">Rust</a>, a safe and fast systems programming language. But more correctly, Amethyst is a whole suite of libraries and tools that collectively make up an engine.</p>
+<p>This book is split into seven sections. This page is the first. The others are:</p>
+<ul>
+<li><a href="./getting_started.html">Getting Started</a> – Prepare your computer for Amethyst development.</li>
+<li>Writing A Simple Application – Build a basic pong game in Rust.</li>
+<li>Effective Amethyst – Learn how to write complex games and applications.</li>
+<li>Scripting – Jump into cross-platform development with <a href="https://www.ruby-lang.org/">Ruby</a>.</li>
+<li><a href="./internals.html">Internals</a> – Peek into Amethyst's innards and learn how it works.</li>
+<li>Bibliography – Read the works that influenced the design.</li>
+</ul>
+<p>Read the <a href="http://ebkalderon.github.io/amethyst/doc/amethyst/index.html">API documentation</a>.</p>
+<h2>Why the hell did you build this?</h2>
+<p>The video game industry is getting bigger every year, and it has actually been <a href="https://www.quora.com/Who-makes-more-money-Hollywood-or-the-video-game-industry">outpacing Hollywood for years</a>. As game studios grow, their toolset grows to match. Though we have got some incredible game development tools in our hands (and often for free, I might add), the process has become increasingly <a href="http://cdn.dbolical.com/videos/engines/1/1/456/Unreal_Engine_4_Features_Trailer_--_GDC_2014.mp4.jpg">clunky</a> and unfriendly to throwaway experimentation and iteration. The tools available are also pretty opaque to how they work internally, and if they are open, they don't usually adhere to modern design patterns well (think pre-C++11 idioms and convoluted class hierarchies).</p>
+<p>In short, I wrote Amethyst to scratch three of my own itches:</p>
+<ol>
+<li>Teach myself game development and computer graphics in its purest form,
+rather than through the lens of a particular game engine.</li>
+<li>Write a fast, modular, data-driven engine suited for rapid prototyping that
+demands (a little) less boilerplate.</li>
+<li>Build a toolset that splits up the traditional &quot;mega-editor&quot; into several
+small but well-integrated tools, adhering to the <a href="https://en.wikipedia.org/wiki/Unix_philosophy">Unix philosophy</a>.</li>
+</ol>
+<h2>Contributing</h2>
+<p>The Markdown source files from which this book is generated can be found <a href="https://github.com/ebkalderon/amethyst/tree/master/book/src">on GitHub</a>. Pull requests are welcome!</p>
+<h1>Getting Started</h1>
+<p>These instructions will help you set up a working Amethyst development environment. Then we'll test this environment by compiling a simple 'Hello World' application.</p>
+<h1>Installation</h1>
+<p>In this section, we'll install the Amethyst crate and its dependencies using
+<code>cargo</code> and set up the <code>amethyst</code> binary.</p>
+<h2>System Requirements</h2>
+<p>Amethyst needs</p>
+<h1>Internals</h1>
+<p>Amethyst was built to be robust and fun to work with from the beginning. Want to understand how the pieces fit together? Read on to learn more.</p>
+<h1>Renderer Design</h1>
+<p>Central to a visually impressive game is a powerful renderer. The document below describes the design decisions behind the rendering engine developed for Amethyst.</p>
+<h2>Goals</h2>
+<ul>
+<li>Develop a portable real-time 3D renderer with support for multiple backends.
+<ul>
+<li>Priority: Vulkan 1.0+, OpenGL 4.3+</li>
+<li>Others are nice to have.</li>
+</ul>
+</li>
+<li>Design a simple and high-level submission format. Clients should never directly alter low-level GPU state in code.
+<ul>
+<li>Frames, objects, and lights.</li>
+</ul>
+</li>
+<li>Embrace data-driven design from the start.
+<ul>
+<li>No rendering approach built in, users load it in as a data structure.</li>
+<li>Objects, lights, and render paths should be easy to serialize and de-serialize.</li>
+</ul>
+</li>
+<li>Internal abstractions should take inspiration from modern graphics API design patterns. Next-gen ready, backwards compatible with legacy stateful APIs like OpenGL.
+<ul>
+<li>Static state objects created once on startup and cached (i.e. pipelines).</li>
+<li>Dynamic state objects updated per-frame (i.e. blend, depth-stencil, rasterizer, viewport).</li>
+<li><a href="http://blog.molecular-matters.com/2014/11/06/stateless-layered-multi-threaded-rendering-part-1/">Stateless draw calls</a>.</li>
+<li>Multithreading used judiciously throughout to maximize performance.</li>
+</ul>
+</li>
+<li>Make this renderer usable outside of the Amethyst engine itself.</li>
+</ul>
+<h2>Non-Goals</h2>
+<ul>
+<li>Provide a game loop or event/message pump.
+<ul>
+<li>Argument: Should be responsibility of the game engine or client application. Renderer code should be reusable and easy to integrate into a variety of third-party application frameworks.</li>
+</ul>
+</li>
+<li>Implement a scene graph or &quot;game world&quot; data structure.
+<ul>
+<li>Argument: Separation of concerns. The renderer should only know how to draw a set of objects on screen, and it should not force a particular scene model on its users. Whether one prefers use a traditional class hierarchy over an entity-component-system model, or vice versa, should not matter.</li>
+</ul>
+</li>
+<li>Implement a default spatial data structure, e.g. an octree or BSP.
+<ul>
+<li>Argument: Scene culling methods all have different performance requirements. The user should decide what spatial data structure is most suitable for their needs.</li>
+</ul>
+</li>
+<li>Implement or provide a default serialization file format parser, e.g. XML, JSON, or YAML.
+<ul>
+<li>Argument: The user can choose to represent their render path in a manner most suitable to their application, whether that be in an external file or hard-coded in Rust.</li>
+</ul>
+</li>
+</ul>
+<h2>High-Level Design</h2>
+<p>The final design loosely resembles the approach used by <a href="http://bitsquid.blogspot.com/2009/10/parallel-rendering.html">Bitsquid</a> (now Autodesk Stingray), the <a href="http://www.gdcvault.com/play/1020706/Nitrous-Mantle-Combining-Efficient-Engine">Oxide Engine</a>, and <a href="http://fabiensanglard.net/doom3/renderer.php">id Tech 4</a>. There are three main parts:</p>
+<ol>
+<li>Frontend
+<ul>
+<li>Loads a <code>RenderPath</code> structure upon initialization. Uses it at runtime to convert a given <code>Frame</code> into an intermediate representation (IR).</li>
+<li>Sorts the IR to minimize redundant state changes.</li>
+</ul>
+</li>
+<li>Intermediate Representation
+<ul>
+<li>A set of data structures that represent the high-level actions that the GPU must take in order to render a single <code>Frame</code>.</li>
+<li>Essentially stateless draw calls. Similar to command buffers in Vulkan, but API-agnostic.</li>
+</ul>
+</li>
+<li>Backend
+<ul>
+<li>Translates the IR received from the frontend into low-level API calls.</li>
+<li>One backend for each target API.</li>
+<li>Backends are selected by users at compile time. For the sake of runtime overhead and stability, dynamic switching of backends is not supported.</li>
+</ul>
+</li>
+</ol>
+<p><img src="./internals/overall.png" alt="Overall" /></p>
+<h2>Example Usage</h2>
+<pre><code class="language-rust">//! This is a dummy program making direct use of the renderer.
+
+extern crate amethyst;
+extern crate amethyst_opengl;
+
+use amethyst::renderer::*;
+use amethyst_opengl::BackendGl;
+
+fn main() {
+    // Describe our render path, e.g. forward, deferred, depth pre-pass, etc.
+    let mut example = RenderPath { ... };
+
+    // Initialize the renderer with our choice of backend.
+    let mut frontend = Frontend::new(BackendGl);
+    frontend.use_path(example);
+
+    loop {
+        // Collect all data needed for rendering.
+        let mut frame = Frame { ... };
+
+        // Draw!
+        frontend.draw(frame);
+    }
+}
+</code></pre>
+<p>See the next three sections to learn how the frontend, IR, and backend all work in more detail.</p>
+<h1>The Frontend</h1>
+<p>This frontend tries to abstract away most of the complexities plaguing real-time rendering and make it dead simple to integrate the renderer into your existing application or game engine.</p>
+<h2>Design</h2>
+<p>As hinted in the previous section, the renderer frontend is responsible for two tasks:</p>
+<ol>
+<li>Parsing a <code>RenderPath</code> structure on initialization and using it per-frame to convert each object and light into a single equivalent IR <code>CommandBuffer</code>.</li>
+<li>Merging and sorting these command buffers to eliminate redundant state changes, and then shipping them off to the backend.</li>
+</ol>
+<p><img src="./internals/renderer/frontend.png" alt="Frontend" /></p>
+<h2>Usage</h2>
+<p>Drawing stuff is simple enough. The <code>draw()</code> method takes in a structure called a <code>Frame</code>, which is a collection of objects and lights, and draws them.</p>
+<h1>Intermediate Representation</h1>
+<h1>Backend</h1>
+<h1>Scripting API Design</h1>
+
+                </div>
+
+                <!-- Mobile navigation buttons -->
+                
+
+                
+
+            </div>
+
+            
+
+            
+
+        </div>
+
+
+        <!-- Local fallback for Font Awesome -->
+        <script>
+            if ($(".fa").css("font-family") !== "FontAwesome") {
+                $('<link rel="stylesheet" type="text/css" href="_FontAwesome/css/font-awesome.css">').prependTo('head');
+            }
+        </script>
+
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+    </body>
+</html>

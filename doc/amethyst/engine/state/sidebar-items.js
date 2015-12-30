@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["StateMachine","A simple stack-based state machine."]],"trait":[["State","A trait which defines game states that can be used by the state machine."]]});
